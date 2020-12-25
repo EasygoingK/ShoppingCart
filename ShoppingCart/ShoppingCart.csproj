@@ -173,6 +173,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManageOrderController.cs" />
     <Compile Include="Controllers\ManageUserController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -375,6 +376,8 @@
     <Content Include="Views\test\GetCart.cshtml" />
     <Content Include="Views\Shared\_CartPartial.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\ManageOrder\Index.cshtml" />
+    <Content Include="Views\ManageOrder\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
