@@ -1,0 +1,66 @@
+﻿@model ShoppingCart.Models.Product
+
+
+@{ 
+    var ProductComment = ViewBag.ProductComment;
+}
+
+
+
+<div>
+    <h4>商品資訊</h4>
+    <hr />
+    <dl>
+        <dt>
+            <img width = "300" src="@this.Model.DefaultImageURL"  />
+        </dt>
+    
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        @foreach (var item in ProductComment)
+        {
+            <dt>@item.GetUserName() :</dt>
+            <dd>@item.Content (@item.CreateDate)</dd>
+        }
+    </dl>
+
+    @using (Html.BeginForm("AddComment", "Home", FormMethod.Post, new { }))
+    {
+        @Html.HiddenFor(m => m.Id)
+        @Html.TextBox("Content")
+        <input type="submit" name="name" value="留言" class="btn btn-default" />
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

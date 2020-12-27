@@ -26,8 +26,8 @@ namespace ShoppingCart.Models
         }
     
         public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<SystemUser> SystemUser { get; set; }
         public virtual DbSet<Order> OrderSet { get; set; }
         public virtual DbSet<OrderDetail> OrderDetailSet { get; set; }
+        public virtual DbSet<ProductComment> ProductComment { get; set; }
     }
 }

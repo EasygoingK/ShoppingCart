@@ -10,7 +10,7 @@ namespace ShoppingCart.Models
     {
         public string GetUrderName()
         {
-            using (Entities db = new Entities())
+            using (UserEntities db = new UserEntities())
             {
                 var data = db.AspNetUsers.Where(s => s.Id == this.UserId).Select(s => s.UserName).FirstOrDefault();
 

@@ -6,10 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="18f22f7742ab4379a42d706151425b2d" Name="Diagram1">
         <EntityTypeShape EntityType="CartModel.Product" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CartModel.SystemUser" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CartModel.Order" Width="1.5" PointX="5" PointY="1" />
-        <EntityTypeShape EntityType="CartModel.OrderDetail" Width="1.5" PointX="2.625" PointY="2.75" />
+        <EntityTypeShape EntityType="CartModel.Order" Width="1.5" PointX="5.25" PointY="0.875" />
+        <EntityTypeShape EntityType="CartModel.OrderDetail" Width="1.5" PointX="2.875" PointY="1.375" />
         <AssociationConnector Association="CartModel.OrderOrderDetail" />
+        <EntityTypeShape EntityType="CartModel.ProductComment" Width="1.5" PointX="0.75" PointY="4.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

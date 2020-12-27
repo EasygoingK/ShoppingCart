@@ -34,7 +34,7 @@ namespace ShoppingCart.Controllers
         {
 
             string searchUserId = null;
-            using (Entities db = new Entities())
+            using (UserEntities db = new UserEntities())
             {
                  searchUserId = db.AspNetUsers.Where(s => s.UserName == userName).Select(s => s.Id).FirstOrDefault();
             }

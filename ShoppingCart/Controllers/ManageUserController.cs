@@ -14,7 +14,7 @@ namespace ShoppingCart.Controllers
 
             ViewBag.ResultMessage = TempData["ResultMessage"];
 
-            using (Entities db = new Entities())
+            using (UserEntities db = new UserEntities())
             {
                 var data = db.AspNetUsers.Select(s => new ManageUser { Id = s.Id, UserName = s.UserName, Email = s.Email });
 
@@ -24,7 +24,7 @@ namespace ShoppingCart.Controllers
 
         public ActionResult Edit(string id)
         {
-            using (Entities db = new Entities())
+            using (UserEntities db = new UserEntities())
             {
                 var data = db.AspNetUsers.Where(w => w.Id == id).Select(s => new ManageUser { Id = s.Id, UserName = s.UserName, Email = s.Email }).FirstOrDefault();
 
@@ -44,7 +44,7 @@ namespace ShoppingCart.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (Entities db = new Entities())
+                using (UserEntities db = new UserEntities())
                 {
                     var data = db.AspNetUsers.FirstOrDefault(p => p.Id == id);
 

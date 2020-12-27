@@ -40,14 +40,15 @@
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="DefaultImageURL" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="SystemUser">
+        <EntityType Name="ProductComment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Content" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ProductId" Type="int" />
         </EntityType>
         <Association Name="FK_OrderOrderDetail">
           <End Role="OrderSet" Type="Self.OrderSet" Multiplicity="1" />
@@ -65,7 +66,7 @@
           <EntitySet Name="OrderDetailSet" EntityType="Self.OrderDetailSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderSet" EntityType="Self.OrderSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SystemUser" EntityType="Self.SystemUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductComment" EntityType="Self.ProductComment" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_OrderOrderDetail" Association="Self.FK_OrderOrderDetail">
             <End Role="OrderSet" EntitySet="OrderSet" />
             <End Role="OrderDetailSet" EntitySet="OrderDetailSet" />
@@ -90,24 +91,15 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="DefaultImageURL" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
-        <EntityType Name="SystemUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityContainer Name="CartEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="SystemUser" EntityType="Self.SystemUser" />
           <EntitySet Name="OrderSet" EntityType="CartModel.Order" />
           <EntitySet Name="OrderDetailSet" EntityType="CartModel.OrderDetail" />
           <AssociationSet Name="OrderOrderDetail" Association="CartModel.OrderOrderDetail">
             <End Role="Order" EntitySet="OrderSet" />
             <End Role="OrderDetail" EntitySet="OrderDetailSet" />
           </AssociationSet>
+          <EntitySet Name="ProductComment" EntityType="CartModel.ProductComment" />
         </EntityContainer>
         <EntityType Name="Order">
           <Key>
@@ -143,6 +135,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ProductComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -152,7 +154,7 @@
     <EntitySetMapping Name="Product">
       <EntityTypeMapping TypeName="IsTypeOf(CartModel.Product)">
         <MappingFragment StoreEntitySet="Product">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
@@ -162,16 +164,6 @@
           <ScalarProperty Name="DefaultImageId" ColumnName="DefaultImageId" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="DefaultImageURL" ColumnName="DefaultImageURL" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SystemUser">
-      <EntityTypeMapping TypeName="IsTypeOf(CartModel.SystemUser)">
-        <MappingFragment StoreEntitySet="SystemUser">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -197,6 +189,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="ProductComment">
+            <EntityTypeMapping TypeName="CartModel.ProductComment">
+              <MappingFragment StoreEntitySet="ProductComment">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
