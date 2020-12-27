@@ -49,5 +49,34 @@ namespace ShoppingCart.Controllers
 
             return View();
         }
+
+        public ActionResult MyOrder()
+        {
+            var userId = HttpContext.User.Identity.GetUserId();
+
+            using (CartEntities db = new CartEntities())
+            {
+                var data = db.OrderSet.Where(s => s.UserId == userId).ToList();
+
+                return View(data);
+            }
+        }
+
+        public ActionResult MyOrderDetail(int id)
+        {
+            using (CartEntities db = new CartEntities())
+            {
+                var data = db.OrderDetailSet.Where(s => s.OrderId == id).ToList();
+
+                if (data.Count == 0 )
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(data);
+                }
+            }
+        }
     }
 }

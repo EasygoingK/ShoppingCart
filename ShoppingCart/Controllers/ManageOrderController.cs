@@ -29,5 +29,30 @@ namespace ShoppingCart.Controllers
                 return View(data);
             }
         }
+
+        public ActionResult SearchUserName(string userName)
+        {
+
+            string searchUserId = null;
+            using (Entities db = new Entities())
+            {
+                 searchUserId = db.AspNetUsers.Where(s => s.UserName == userName).Select(s => s.Id).FirstOrDefault();
+            }
+
+            if (!String.IsNullOrEmpty(searchUserId))
+            {
+                using (CartEntities db = new CartEntities())
+                {
+                    var data = db.OrderSet.Where(s => s.UserId == searchUserId).ToList();
+
+                    return View("Index", data);
+                }
+            }
+            else
+            {
+                return View("Index", new List<Order>());
+            }
+
+        }
     }
 }
